@@ -456,48 +456,6 @@ AgregarVariables_IntraMes <- function(dataset) {
   if(atributos_presentes(c("Visa_msaldototal","Visa_mconsumototal")))
     dataset[, delta_saldo_total_visa := Visa_msaldototal - Visa_mconsumototal] 
   
-  if(atributos_presentes(c('Master_madelantodolares','Master_mconsumosdolares')))
-    dataset[, ratio_adelanto_consumos_dolares_master := (Master_madelantodolares / Master_mconsumosdolares)]
-  
-  if(atributos_presentes(c('Master_madelantopesos','Master_mconsumospesos')))
-    dataset[, ratio_adelanto_consumos_pesos_master := (Master_madelantopesos / Master_mconsumospesos)]
-  
-  if(atributos_presentes(c('Master_msaldototal','Master_mconsumototal')))
-    dataset[, delta_saldo_total_master := (Master_msaldototal - Master_mconsumototal)]
-  
-  if(atributos_presentes(c('Master_status')))
-    dataset[, flag_estado_cuenta_master_proceso_cierre_y_cerradas := ifelse(Master_status %in% c(6,7,9),1,0)]
-  
-  if(atributos_presentes(c('Master_status')))
-    dataset[, flag_estado_cuenta_master_activa := ifelse(Master_status == 0,1,0)]
-  
-  if(atributos_presentes(c('Master_status')))
-    dataset[, flag_estado_cuenta_master_por_cerrar := ifelse(Master_status %in% c(6,7),1,0)]
-  
-  if(atributos_presentes(c('Master_status')))
-    dataset[, flag_estado_cuenta_master_cerrada := ifelse(Master_status == 9,1,0)]
-  
-  if(atributos_presentes(c('Master_mpagominimo ','Master_mpagado')))
-    dataset[, ratio_pago_minimo_total := (Master_mpagominimo / Master_mpagado)]
-  
-  if(atributos_presentes(c('Master_mconsumototal ','Master_mpagado')))
-    dataset[, ratio_pago_consumo_total_master := (Master_mpagado / Master_mconsumototal)]
-  
-  if(atributos_presentes(c('Master_Finiciomora','Master_Fvencimiento')))
-    dataset[, dias_a_vencimiento_mora_master := (Master_Finiciomora - Master_Fvencimiento)]
-  
-  if(atributos_presentes(c('Master_mpagosdolares','Master_mpagospesos')))
-    dataset[, ratio_pagos_pesos_dolares_master := (Master_mpagospesos / Master_mpagosdolares)]
-  
-  if(atributos_presentes(c('Master_mconsumospesos','Master_mconsumosdolares')))
-    dataset[, ratio_consumos_pesos_dolares_master := (Master_mconsumospesos / Master_mconsumosdolares)]
-  
-  if(atributos_presentes(c('Master_msaldopesos ','Master_msaldodolares')))
-    dataset[, ratio_saldo_pesos_dolares_master := (Master_msaldopesos / Master_msaldodolares)]
-  
-  if(atributos_presentes(c('Visa_madelantodolares','Visa_mconsumosdolares')))
-    dataset[, ratio_adelanto_consumos_dolares_visa := (Visa_madelantodolares / Visa_mconsumosdolares)]
-          
   
   # valvula de seguridad para evitar valores infinitos
   # paso los infinitos a NULOS

@@ -13,8 +13,8 @@ miAmbiente$modalidad <-  "vivencial"
 miAmbiente$dataset_pequeno <- "~/datasets/vivencial_dataset_pequeno.csv"
 
 
-miAmbiente$dataset_competencia <- "~/datasets/conceptual_competencia_2024.csv.gz"
-# miAmbiente$dataset_competencia <- "~/datasets/vivencial_competencia_2024.csv.gz"
+#miAmbiente$dataset_competencia <- "~/datasets/conceptual_competencia_2024.csv.gz"
+miAmbiente$dataset_competencia <- "~/datasets/vivencial_competencia_2024.csv.gz"
 
 
 # aqui va su primer semilla

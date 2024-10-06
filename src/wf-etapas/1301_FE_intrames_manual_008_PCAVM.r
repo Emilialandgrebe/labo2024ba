@@ -503,6 +503,110 @@ AgregarVariables_IntraMes <- function(dataset) {
     dataset[, ratio_adelanto_consumos_dolares_visa := (Visa_madelantodolares / Visa_mconsumosdolares)]
   
   
+  # Sexta tanda
+  
+  
+  if(atributos_presentes(c("vm_mlimitecompra"))) 
+    dataset[, ratio_limite_tc := vm_mlimitecompra / median(vm_mlimitecompra)]
+  
+  if(atributos_presentes(c("mpayroll", "mpayroll2"))) 
+    dataset[, total_acreditacion_haberes := mpayroll + mpayroll2]
+  
+  if(atributos_presentes(c("ccheques_depositados", "ccheques_depositados_rechazados"))) 
+    dataset[, tasa_exito_cheques_depositados := ccheques_depositados / (ccheques_depositados + ccheques_depositados_rechazados)]
+  
+  if(atributos_presentes(c("ccheques_emitidos_rechazados", "ccheques_emitidos"))) 
+    dataset[, tasa_rechazo_cheques_emitidos := ccheques_emitidos_rechazados / ccheques_emitidos]
+  
+  if(atributos_presentes(c("mcheques_depositados", "ccheques_depositados"))) 
+    dataset[, monto_promedio_cheque_depositado := mcheques_depositados / ccheques_depositados]
+  
+  if(atributos_presentes(c("mcheques_emitidos", "ccheques_emitidos"))) 
+    dataset[, monto_promedio_cheque_emitido := mcheques_emitidos / ccheques_emitidos]
+  
+  if(atributos_presentes(c("mcheques_depositados_rechazados", "mcheques_emitidos_rechazados"))) 
+    dataset[, monto_total_cheques_rechazados := mcheques_depositados_rechazados + mcheques_emitidos_rechazados]
+  
+  if(atributos_presentes(c("monto_total_cheques_rechazados", "mcheques_depositados", "mcheques_emitidos"))) 
+    dataset[, proporcion_cheques_rechazado := monto_total_cheques_rechazados / (mcheques_depositados + mcheques_emitidos)]
+  
+  if(atributos_presentes(c("ccheques_emitidos", "ccheques_depositados"))) 
+    dataset[, ratio_cheques_emitidos_depositados := ccheques_emitidos / ccheques_depositados]
+  
+  if(atributos_presentes(c("ccheques_emitidos_rechazados", "ccheques_depositados_rechazados"))) 
+    dataset[, ratio_rechazos_emitidos_depositados := ccheques_emitidos_rechazados / ccheques_depositados_rechazados]
+  
+  if(atributos_presentes(c("mcheques_depositados_rechazados", "ccheques_depositados_rechazados"))) 
+    dataset[, mpromedio_cheque_depositado_rechazado := mcheques_depositados_rechazados / ccheques_depositados_rechazados]
+  
+  if(atributos_presentes(c("mcheques_emitidos_rechazados", "ccheques_emitidos_rechazados"))) 
+    dataset[, mpromedio_cheque_emitido_rechazado := mcheques_emitidos_rechazados / ccheques_emitidos_rechazados]
+  
+  if(atributos_presentes(c("ccheques_depositados_rechazados", "ccheques_emitidos_rechazados", "ccheques_depositados", "ccheques_emitidos"))) 
+    dataset[, proporcion_rechazos_cantidad := (ccheques_depositados_rechazados + ccheques_emitidos_rechazados) / (ccheques_depositados + ccheques_emitidos)]
+  
+  if(atributos_presentes(c("cliente_edad", "cproductos"))) 
+    dataset[, edad_productos := cliente_edad / cproductos]
+  
+  if(atributos_presentes(c("tcuentas", "cliente_edad"))) 
+    dataset[, tasa_actividad_en_cuentas := tcuentas / cliente_edad]
+  
+  if(atributos_presentes(c("mrentabilidad_annual", "cliente_antiguedad"))) 
+    dataset[, mrentabilidad_annual_vs_antiguedad := mrentabilidad_annual / cliente_antiguedad]
+  
+  if(atributos_presentes(c("mcaja_ahorro", "mactivos_margen"))) 
+    dataset[, proporcion_de_ahorro := mcaja_ahorro / mactivos_margen]
+  
+  if(atributos_presentes(c("mrentabilidad", "cliente_edad"))) 
+    dataset[, relacion_vs_edad := mrentabilidad / cliente_edad]
+  
+  if(atributos_presentes(c("ctarjeta_visa_debitos_automaticos", "cliente_antiguedad"))) 
+    dataset[, debitos_automaticos_por_antiguedad := ctarjeta_visa_debitos_automaticos / cliente_antiguedad]
+  
+  if(atributos_presentes(c("mtarjeta_visa_debitos_automaticos", "cliente_antiguedad"))) 
+    dataset[, monto_debitos_automaticos_antiguedad := mtarjeta_visa_debitos_automaticos / cliente_antiguedad]
+  
+  if(atributos_presentes(c("ctarjeta_visa_debitos_automaticos", "ctarjeta_master_debitos_automaticos"))) 
+    dataset[, preferencia_tarjeta := ctarjeta_visa_debitos_automaticos / ctarjeta_master_debitos_automaticos]
+  
+  if(atributos_presentes(c("mtarjeta_visa_descuentos", "mtarjeta_master_descuentos", "cliente_antiguedad"))) 
+    dataset[, descuentos_antiguedad := (mtarjeta_visa_descuentos + mtarjeta_master_descuentos) / cliente_antiguedad]
+  
+  if(atributos_presentes(c("mtarjeta_visa_descuentos", "mtarjeta_master_descuentos", "cliente_edad"))) 
+    dataset[, descuentos_edad := (mtarjeta_visa_descuentos + mtarjeta_master_descuentos) / cliente_edad]
+  
+  if(atributos_presentes(c("mcajeros_propios_descuentos", "cliente_antiguedad"))) 
+    dataset[, mcajeros_ppios_antiguedad := mcajeros_propios_descuentos / cliente_antiguedad]
+  
+  if(atributos_presentes(c("ctarjeta_visa_descuentos", "cliente_antiguedad"))) 
+    dataset[, cdescuentos_visa_antiguedad := ctarjeta_visa_descuentos / cliente_antiguedad]
+  
+  if(atributos_presentes(c("ctarjeta_master_descuentos", "cliente_antiguedad"))) 
+    dataset[, cdescuentos_master_antiguedad := ctarjeta_master_descuentos / cliente_antiguedad]
+  
+  if(atributos_presentes(c("mtarjeta_master_descuentos", "cliente_antiguedad"))) 
+    dataset[, mdescuentos_master_antiguedad := mtarjeta_master_descuentos / cliente_antiguedad]
+  
+  if(atributos_presentes(c("mtarjeta_visa_descuentos", "cliente_antiguedad"))) 
+    dataset[, mdescuentos_visa_antiguedad := mtarjeta_visa_descuentos / cliente_antiguedad]
+  
+  if(atributos_presentes(c("mtransferencias_recibidas", "cliente_edad"))) 
+    dataset[, mtrasnferencias_recibidas_vs_edad := mtransferencias_recibidas / cliente_edad]
+  
+  if(atributos_presentes(c("mtransferencias_emitidas", "cliente_edad"))) 
+    dataset[, mtrasnferencias_emitidas_vs_edad := mtransferencias_emitidas / cliente_edad]
+  
+  if(atributos_presentes(c("cextraccion_autoservicio", "cliente_edad"))) 
+    dataset[, cextracciones_edad := cextraccion_autoservicio / cliente_edad]
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   # valvula de seguridad para evitar valores infinitos
   # paso los infinitos a NULOS
@@ -541,13 +645,33 @@ AgregarVariables_IntraMes <- function(dataset) {
   }
   
   
+  # Aca agregamos los primeros 20 componentes principales que salen haciendo PCA
+  
+  
+  cat("Aca empieza a correr PCA. Suerte.\n")
+  datasetsinNA <- dataset
+  datasetsinNA[is.na(datasetsinNA)] <- 0
+  pca_datos <- prcomp(datasetsinNA[,1:154],center=TRUE,scale=TRUE)
+  rm(datasetsinNA) # borramos este dataset creado para ahorrar espacio
+  autovec_pca <- as.data.table(pca_datos$x[,1:20])
+  rm(pca_datos) # borramos para ahorrar espacio
+  #dataset <-- dataset[, names(autovec_pca) := autovec_pca]
+  dataset <<- cbind(dataset,autovec_pca)
+  rm(autovec_pca) # borramos para ahorrar espacio
+  
+  cat("Si llegaste hasta aca es porque PCA no te hizo volar por los aires la corrida. Felicitaciones.\n")
+  
+  
+  
+  
+  
   
   cat( "fin AgregarVariables_IntraMes()\n")
 }
 #------------------------------------------------------------------------------
 #------------------------------------------------------------------------------
 # Aqui comienza el programa
-cat( "1301_FE_intrames_manual_005.r  START\n")
+cat( "1301_FE_intrames_manual_008_pca_masvariables.r  START\n")
 action_inicializar() 
 
 
@@ -619,4 +743,4 @@ GrabarOutput()
 #  archivos tiene a los files que debo verificar existen para no abortar
 
 action_finalizar( archivos = c("dataset.csv.gz","dataset_metadata.yml")) 
-cat( "1301_FE_intrames_manual_005.r  END\n")
+cat( "1301_FE_intrames_manual_008_pca_masvariables.r  END\n")
